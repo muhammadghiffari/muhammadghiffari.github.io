@@ -1,0 +1,44 @@
+body{
+    min-height: 3000px;
+}
+
+.jumbotron{
+    padding-top: 7rem;
+    background-color: #e2edff;
+}
+
+.navimg {
+    margin-right: 1.5px;
+    margin-bottom: 4px;
+    width: 28px;
+    height: 30px;
+    border-radius: 25%;
+}
+
+#gallery{
+    background-color: #e2edff;  
+}
+
+.rounded-circle{
+    margin-top: 18px;
+}
+
+h2{
+    margin-bottom: 10px;
+}
+
+.card-img-top{
+    border-radius: 10px, 10px, 10px, 0px;
+}
+
+.card{
+    border-radius: 10px;
+}
+
+#contact{
+    margin-top: 20px;
+}
+
+section{
+    padding-top: 6rem;
+}
