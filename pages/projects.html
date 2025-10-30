@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Muhammad Ghiffari</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
+    
+    <!-- Font Awesome CDN untuk Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <!-- Internal CSS - Projects page specific styles -->
+    <style>
+        /* Projects Header */
+        .projects-header {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            padding: 4rem 0 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .projects-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            background-size: cover;
+        }
+
+        /* Project Detail Card */
+        .project-detail {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 3rem;
+            transition: all 0.4s ease;
+        }
+
+        .project-detail:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Project Image Gallery */
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 1.5rem;
+            background-color: #f9fafb;
+        }
+
+        .gallery-thumb {
+            position: relative;
+            aspect-ratio: 16/9;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-thumb:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-thumb:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Lightbox using :target */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox:target {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 0.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -3rem;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            text-decoration: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            background-color: #ef4444;
+            transform: rotate(90deg);
+        }
+
+        /* Features List - ORDERED LIST #2 (Required) */
+        .features-list {
+            list-style: none;
+            counter-reset: feature-counter;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .features-list li {
+            counter-increment: feature-counter;
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1rem;
+            color: #6b7280;
+            line-height: 1.75;
+            font-size: 0.9375rem;
+        }
+
+        .features-list li::before {
+            content: counter(feature-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.75rem;
+            height: 1.75rem;
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        /* Impact Badge */
+        .impact-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 0.5rem;
+            color: #22c55e;
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+        }
+
+        .impact-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            background-color: #22c55e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Projects Header -->
+    <section class="projects-header">
+        <div class="container" style="position: relative; z-index: 2;">
+            <h1 style="font-family: 'Poppins', sans-serif; font-size: 3rem; font-weight: 700; margin-bottom: 1rem; color:#ffffff;">
+                My Projects
+            </h1>
+            <p style="font-size: 1.25rem; opacity: 0.95; max-width: 700px; line-height: 1.75; color: #f3f4f6;">
+                A collection of full-stack applications, digital solutions, and design projects that demonstrate my
+                technical expertise and problem-solving abilities.
+            </p>
+        </div>
+    </section>
+
+    <!-- Projects Container -->
+    <section class="section">
+        <div class="container">
+
+            <!-- PROJECT 1: Real-Time Thesis Selection System -->
+            <div class="project-detail">
+
+                <!-- Project Header -->
+                <div style="padding: 2rem 2rem 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <span class="badge badge-primary">Internship Project</span>
+                        <span style="color: #6b7280; font-size: 0.875rem;">Oct 2024 - Mar 2025</span>
+                    </div>
+
+                    <h2
+                        style="font-family: 'Poppins', sans-serif; font-size: 2rem; font-weight: 700; color: #1f2937; margin-bottom: 1rem;">
+                        Real-Time Thesis Title Selection System
+                    </h2>
+
+                    <p style="color: #6b7280; line-height: 1.75; font-size: 1rem; margin-bottom: 1.5rem;">
+                        Built a comprehensive full-stack system using Laravel 12, Livewire 3, WebSockets, and MySQL to
+                        improve transparency and efficiency in the thesis title selection process at IMERI FKUI. The
+                        system features real-time updates, automated notifications, and conflict prevention mechanisms.
+                    </p>
+
+                    <!-- Key Features - ORDERED LIST #2 (Required) -->
+                    <h3
+                        style="font-family: 'Poppins', sans-serif; font-size: 1.25rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">
+                        Key Features
+                    </h3>
+                    <ol class="features-list">
+                        <li>Real-time countdown timer for selection periods with WebSocket integration</li>
+                        <li>Live activity log system tracking all user actions and changes</li>
+                        <li>Admin dashboard for monitoring and management with analytics</li>
+                        <li>Conflict prevention system for title assignments and duplicates</li>
+                        <li>Automated email notifications for selection updates and deadlines</li>
+                    </ol>
+
+                    <!-- Tech Stack -->
+                    <div style="margin-top: 1.5rem;">
+                        <h4
+                            style="font-size: 0.875rem; font-weight: 600; color: #6b7280; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                            Tech Stack
+                        </h4>
+                        <div class="tag-group">
+                            <span class="tag">Laravel 12</span>
+                            <span class="tag">Livewire 3</span>
+                            <span class="tag">WebSockets</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">Tailwind CSS</span>
+                        </div>
+                    </div>
+
+                    <!-- Impact -->
+                    <div class="impact-badge">
+                        <span class="impact-icon">✓</span>
+                        Impact: Enhanced transparency and eliminated manual conflicts in academic processes
+                    </div>
+                </div>
+
+                <!-- Project Screenshots Gallery -->
+                <div class="project-gallery">
+                    <a href="#lightbox-thesis-1" class="gallery-thumb">
+                        <img src="../assets/images/projects/thesis-dashboard.jpg" alt="System Dashboard"
+                            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'225\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'225\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'14\' font-family=\'Inter\'%3EDashboard%3C/text%3E%3C/svg%3E'">
+                    </a>
+                    <a href="#lightbox-thesis-2" class="gallery-thumb">
+                        <img src="../assets/images/projects/thesis-selection.jpg" alt="Selection Interface"
+                            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'225\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'225\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'14\' font-family=\'Inter\'%3ESelection Interface%3C/text%3E%3C/svg%3E'">
+                    </a>
+                    <a href="#lightbox-thesis-3" class="gallery-thumb">
+                        <img src="../assets/images/projects/thesis-admin.jpg" alt="Admin Panel"
+                            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'225\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'225\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'14\' font-family=\'Inter\'%3EAdmin Panel%3C/text%3E%3C/svg%3E'">
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- PROJECT 2: POS Application with QR Code -->
+            <div class="project-detail">
+
+                <div style="padding: 2rem 2rem 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <span class="badge badge-success">Capstone Project</span>
+                        <span style="color: #6b7280; font-size: 0.875rem;">2025</span>
+                    </div>
+
+                    <h2
+                        style="font-family: 'Poppins', sans-serif; font-size: 2rem; font-weight: 700; color: #1f2937; margin-bottom: 1rem;">
+                        POS Application with QR Code Integration
+                    </h2>
+
+                    <p style="color: #6b7280; line-height: 1.75; font-size: 1rem; margin-bottom: 1.5rem;">
+                        Modern Point of Sale application designed to streamline retail operations for small businesses.
+                        Features auto-generated product codes with QR scanning, comprehensive cash management, real-time
+                        transaction logging, and role-based access control.
+                    </p>
+
+                    <h3
+                        style="font-family: 'Poppins', sans-serif; font-size: 1.25rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">
+                        Key Features
+                    </h3>
+                    <ul style="list-style: none; padding: 0; margin: 1.5rem 0;">
+                        <li style="padding-left: 1.5rem; margin-bottom: 0.75rem; color: #6b7280; position: relative;">
+                            <span style="position: absolute; left: 0; color: #2563eb; font-weight: 700;">•</span>
+                            Auto-generated product codes with QR scanning capability
+                        </li>
+                        <li style="padding-left: 1.5rem; margin-bottom: 0.75rem; color: #6b7280; position: relative;">
+                            <span style="position: absolute; left: 0; color: #2563eb; font-weight: 700;">•</span>
+                            Cash management system with opening and closing balance tracking
+                        </li>
+                        <li style="padding-left: 1.5rem; margin-bottom: 0.75rem; color: #6b7280; position: relative;">
+                            <span style="position: absolute; left: 0; color: #2563eb; font-weight: 700;">•</span>
+                            Real-time transaction logs and receipt printing (DOMPDF)
+                        </li>
+                        <li style="padding-left: 1.5rem; margin-bottom: 0.75rem; color: #6b7280; position: relative;">
+                            <span style="position: absolute; left: 0; color: #2563eb; font-weight: 700;">•</span>
+                            Role-based access control (Cashier vs Manager roles)
+                        </li>
+                        <li style="padding-left: 1.5rem; margin-bottom: 0.75rem; color: #6b7280; position: relative;">
+                            <span style="position: absolute; left: 0; color: #2563eb; font-weight: 700;">•</span>
+                            Discount management system with promotional features
+                        </li>
+                        <li style="padding-left: 1.5rem; margin-bottom: 0; color: #6b7280; position: relative;">
+                            <span style="position: absolute; left: 0; color: #2563eb; font-weight: 700;">•</span>
+                            Transaction history and comprehensive reporting dashboard
+                        </li>
+                    </ul>
+
+                    <div style="margin-top: 1.5rem;">
+                        <h4
+                            style="font-size: 0.875rem; font-weight: 600; color: #6b7280; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                            Tech Stack
+                        </h4>
+                        <div class="tag-group">
+                            <span class="tag">Laravel 11</span>
+                            <span class="tag">Livewire 3</span>
+                            <span class="tag">Jetstream</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">Tailwind CSS</span>
+                            <span class="tag">DOMPDF</span>
+                            <span class="tag">Vite</span>
+                        </div>
+                    </div>
+
+                    <div class="impact-badge">
+                        <span class="impact-icon">✓</span>
+                        Impact: Reduced checkout time by 40% and eliminated manual entry errors
+                    </div>
+                </div>
+
+                <div class="project-gallery">
+                    <a href="#lightbox-pos-1" class="gallery-thumb">
+                        <img src="../assets/images/projects/pos-interface.png" alt="POS Interface"
+                            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'225\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'225\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'14\' font-family=\'Inter\'%3EPOS Interface%3C/text%3E%3C/svg%3E'">
+                    </a>
+                    <a href="#lightbox-pos-2" class="gallery-thumb">
+                        <img src="../assets/images/projects/email-resetpassword.png" alt="Email Reset Password"
+                            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'225\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'225\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'14\' font-family=\'Inter\'%3EQR Scanning%3C/text%3E%3C/svg%3E'">
+                    </a>
+                    <a href="#lightbox-pos-3" class="gallery-thumb">
+                        <img src="../assets/images/projects/pos-receipt.png" alt="Receipt Printing"
+                            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'225\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'225\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'14\' font-family=\'Inter\'%3EReceipt%3C/text%3E%3C/svg%3E'">
+                    </a>
+                    <a href="#lightbox-pos-4" class="gallery-thumb">
+                        <img src="../assets/images/projects/pos-dashboard.png" alt="User Dashboard"
+                            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'225\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'225\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'14\' font-family=\'Inter\'%3EDashboard%3C/text%3E%3C/svg%3E'">
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- PROJECT 3: Company Profile Website -->
+            <div class="project-detail">
+
+                <div style="padding: 2rem 2rem 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <span class="badge badge-primary">Internship Project</span>
+                        <span style="color: #6b7280; font-size: 0.875rem;">2024-2025</span>
+                    </div>
+
+                    <h2
+                        style="font-family: 'Poppins', sans-serif; font-size: 2rem; font-weight: 700; color: #1f2937; margin-bottom: 1rem;">
+                        Company Profile Website (IMERI FKUI)
+                    </h2>
+
+                    <p style="color: #6b7280; line-height: 1.75; font-size: 1rem; margin-bottom: 1.5rem;">
+                        Designed and developed a fully responsive company profile website for the Center of e-Learning
+                        IMERI FKUI using WordPress and Figma. The website serves as a centralized hub for workshop
+                        announcements, online courses, research updates, and event information.
+                    </p>
+
+                    <h3
+                        style="font-family: 'Poppins', sans-serif; font-size: 1.25rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">
+                        Key Features
+                    </h3>
+                    <ul style="list-style: none; padding: 0; margin: 1.5rem 0;">
+                        <li style="padding-left: 1.5rem; margin-bottom: 0.75rem; color: #6b7280; position: relative;">
+                            <span style="position: absolute; left: 0; color: #2563eb; font-weight: 700;">•</span>
+                            Centralized workshop announcements and registration system
+                        </li>
+                        <li style="padding-left: 1.5rem; margin-bottom: 0.75rem; color: #6b7280; position: relative;">
+                            <span style="position: absolute; left: 0; color: #2563eb; font-weight: 700;">•</span>
+                            Online course listings with detailed descriptions
+                        </li>
+                        <li style="padding-left: 1.5rem; margin-bottom: 0.75rem; color: #6b7280; position: relative;">
+                            <span style="position: absolute; left: 0; color: #2563eb; font-weight: 700;">•</span>
+                            Research updates section for faculty publications
+                        </li>
+                        <li style="padding-left: 1.5rem; margin-bottom: 0.75rem; color: #6b7280; position: relative;">
+                            <span style="position: absolute; left: 0; color: #2563eb; font-weight: 700;">•</span>
+                            Event calendar integration with Google Calendar
+                        </li>
+                        <li style="padding-left: 1.5rem; margin-bottom: 0; color: #6b7280; position: relative;">
+                            <span style="position: absolute; left: 0; color: #2563eb; font-weight: 700;">•</span>
+                            Mobile-responsive design optimized for all devices
+                        </li>
+                    </ul>
+
+                    <div style="margin-top: 1.5rem;">
+                        <h4
+                            style="font-size: 0.875rem; font-weight: 600; color: #6b7280; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                            Tech Stack
+                        </h4>
+                        <div class="tag-group">
+                            <span class="tag">WordPress</span>
+                            <span class="tag">Figma</span>
+                            <span class="tag">Custom Plugins</span>
+                            <span class="tag">Responsive Design</span>
+                        </div>
+                    </div>
+
+                    <div class="impact-badge">
+                        <span class="impact-icon">✓</span>
+                        Impact: Improved institutional visibility and engagement for 500+ users
+                    </div>
+                </div>
+
+                <div class="project-gallery">
+                    <a href="#lightbox-company-1" class="gallery-thumb">
+                        <img src="../assets/images/projects/company-homepage.jpg" alt="Homepage"
+                            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'225\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'225\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'14\' font-family=\'Inter\'%3EHomepage%3C/text%3E%3C/svg%3E'">
+                    </a>
+                    <a href="#lightbox-company-2" class="gallery-thumb">
+                        <img src="../assets/images/projects/company-events.jpg" alt="Event Page"
+                            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'225\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'225\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'14\' font-family=\'Inter\'%3EEvent Page%3C/text%3E%3C/svg%3E'">
+                    </a>
+                    <a href="#lightbox-company-3" class="gallery-thumb">
+                        <img src="../assets/images/projects/company-360.jpeg" alt="360 View"
+                            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'225\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'225\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'14\' font-family=\'Inter\'%360 View%3C/text%3E%3C/svg%3E'">
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- PROJECT 4: QR Code Attendance Application -->
+            <div class="project-detail">
+
+                <div style="padding: 2rem 2rem 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <span class="badge badge-warning"
+                            style="background-color: rgba(245, 158, 11, 0.1); color: #f59e0b; border-color: rgba(245, 158, 11, 0.3);">Academic
+                            Project</span>
+                        <span style="color: #6b7280; font-size: 0.875rem;">SMKN 40 Jakarta</span>
+                    </div>
+
+                    <h2
+                        style="font-family: 'Poppins', sans-serif; font-size: 2rem; font-weight: 700; color: #1f2937; margin-bottom: 1rem;">
+                        QR Code Attendance Application
+                    </h2>
+
+                    <p style="color: #6b7280; line-height: 1.75; font-size: 1rem; margin-bottom: 1.5rem;">
+                        Real-time attendance tracking system with secure QR code validation for educational
+                        institutions. Features dynamic QR code generation, instant attendance recording, and
+                        comprehensive reporting dashboard for teachers and administrators.
+                    </p>
+
+                    <div style="margin-top: 1.5rem;">
+                        <h4
+                            style="font-size: 0.875rem; font-weight: 600; color: #6b7280; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                            Tech Stack
+                        </h4>
+                        <div class="tag-group">
+                            <span class="tag">PHP</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">QR Code Library</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-gallery">
+                    <a href="#lightbox-qr-1" class="gallery-thumb">
+                        <img src="../assets/images/projects/qr-scan.jpg" alt="QR Scan Interface"
+                            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'225\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'225\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'14\' font-family=\'Inter\'%3EQR Scan%3C/text%3E%3C/svg%3E'">
+                    </a>
+                    <a href="#lightbox-qr-2" class="gallery-thumb">
+                        <img src="../assets/images/projects/qr-dashboard.jpg" alt="Attendance Dashboard"
+                            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'225\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'225\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'14\' font-family=\'Inter\'%3EDashboard%3C/text%3E%3C/svg%3E'">
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- PROJECT 5: FemmeSight UI/UX Design -->
+            <div class="project-detail">
+
+                <div style="padding: 2rem 2rem 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <span class="badge badge-primary">Internship Project</span>
+                        <span style="color: #6b7280; font-size: 0.875rem;">IMERI FKUI</span>
+                    </div>
+
+                    <h2
+                        style="font-family: 'Poppins', sans-serif; font-size: 2rem; font-weight: 700; color: #1f2937; margin-bottom: 1rem;">
+                        FemmeSight UI/UX Design
+                    </h2>
+
+                    <p style="color: #6b7280; line-height: 1.75; font-size: 1rem; margin-bottom: 1.5rem;">
+                        Designed comprehensive mockups and interactive prototypes for FemmeSight, an assistive mobile
+                        application aimed at helping visually impaired women. The project focused on accessibility,
+                        intuitive navigation, and inclusive design principles to create an empowering user experience.
+                    </p>
+
+                    <h3
+                        style="font-family: 'Poppins', sans-serif; font-size: 1.25rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">
+                        Design Process
+                    </h3>
+                    <ul style="list-style: none; padding: 0; margin: 1.5rem 0;">
+                        <li style="padding-left: 1.5rem; margin-bottom: 0.75rem; color: #6b7280; position: relative;">
+                            <span style="position: absolute; left: 0; color: #2563eb; font-weight: 700;">•</span>
+                            User research and accessibility requirements analysis
+                        </li>
+                        <li style="padding-left: 1.5rem; margin-bottom: 0.75rem; color: #6b7280; position: relative;">
+                            <span style="position: absolute; left: 0; color: #2563eb; font-weight: 700;">•</span>
+                            Low-fidelity wireframing and user flow mapping
+                        </li>
+                        <li style="padding-left: 1.5rem; margin-bottom: 0.75rem; color: #6b7280; position: relative;">
+                            <span style="position: absolute; left: 0; color: #2563eb; font-weight: 700;">•</span>
+                            High-fidelity mockups with accessibility features
+                        </li>
+                        <li style="padding-left: 1.5rem; margin-bottom: 0.75rem; color: #6b7280; position: relative;">
+                            <span style="position: absolute; left: 0; color: #2563eb; font-weight: 700;">•</span>
+                            Interactive prototyping with voice navigation
+                        </li>
+                        <li style="padding-left: 1.5rem; margin-bottom: 0; color: #6b7280; position: relative;">
+                            <span style="position: absolute; left: 0; color: #2563eb; font-weight: 700;">•</span>
+                            Usability testing and iterative improvements
+                        </li>
+                    </ul>
+
+                    <div style="margin-top: 1.5rem;">
+                        <h4
+                            style="font-size: 0.875rem; font-weight: 600; color: #6b7280; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                            Tools Used
+                        </h4>
+                        <div class="tag-group">
+                            <span class="tag">Figma</span>
+                            <span class="tag">Wireframing</span>
+                            <span class="tag">Prototyping</span>
+                            <span class="tag">Accessibility Design</span>
+                        </div>
+                    </div>
+
+                    <div class="impact-badge">
+                        <span class="impact-icon">✓</span>
+                        Impact: Created inclusive design solution for assistive technology
+                    </div>
+                </div>
+
+                <div class="project-gallery">
+                    <a href="#lightbox-femme-1" class="gallery-thumb">
+                        <img src="../assets/images/projects/femme-wireframe.png" alt="Wireframes"
+                            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'225\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'225\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'14\' font-family=\'Inter\'%3EWireframes%3C/text%3E%3C/svg%3E'">
+                    </a>
+                    <a href="#lightbox-femme-2" class="gallery-thumb">
+                        <img src="../assets/images/projects/femme-mockup.png" alt="High-Fidelity Mockups"
+                            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'225\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'225\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'14\' font-family=\'Inter\'%3EMockups%3C/text%3E%3C/svg%3E'">
+                    </a>
+                    <a href="#lightbox-femme-3" class="gallery-thumb">
+                        <img src="../assets/images/projects/femme-prototype.jpg" alt="Interactive Prototype"
+                            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'225\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'225\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'14\' font-family=\'Inter\'%3EPrototype%3C/text%3E%3C/svg%3E'">
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Lightbox Modals (CSS-only using :target) -->
+
+    <!-- Thesis System Lightboxes -->
+    <div id="lightbox-thesis-1" class="lightbox">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">×</a>
+            <img src="../assets/images/projects/thesis-dashboard.jpg" alt="System Dashboard">
+        </div>
+    </div>
+
+    <div id="lightbox-thesis-2" class="lightbox">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">×</a>
+            <img src="../assets/images/projects/thesis-selection.jpg" alt="Selection Interface">
+        </div>
+    </div>
+
+    <div id="lightbox-thesis-3" class="lightbox">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">×</a>
+            <img src="../assets/images/projects/thesis-admin.jpg" alt="Admin Panel">
+        </div>
+    </div>
+
+    <!-- POS System Lightboxes -->
+    <div id="lightbox-pos-1" class="lightbox">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">×</a>
+            <img src="../assets/images/projects/pos-interface.png" alt="POS Interface">
+        </div>
+    </div>
+
+    <div id="lightbox-pos-2" class="lightbox">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">×</a>
+            <img src="../assets/images/projects/email-resetpassword.png" alt="Password Reset">
+        </div>
+    </div>
+
+    <div id="lightbox-pos-3" class="lightbox">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">×</a>
+            <img src="../assets/images/projects/pos-receipt.png" alt="Receipt">
+        </div>
+    </div>
+
+    <div id="lightbox-pos-4" class="lightbox">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">×</a>
+            <img src="../assets/images/projects/pos-dashboard.png" alt="Dashboard">
+        </div>
+    </div>
+
+    <!-- Company Profile Lightboxes -->
+    <div id="lightbox-company-1" class="lightbox">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">×</a>
+            <img src="../assets/images/projects/company-homepage.jpg" alt="Homepage">
+        </div>
+    </div>
+
+    <div id="lightbox-company-2" class="lightbox">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">×</a>
+            <img src="../assets/images/projects/company-events.jpg" alt="Event Page">
+        </div>
+    </div>
+
+    <div id="lightbox-company-3" class="lightbox">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">×</a>
+            <img src="../assets/images/projects/company-360.jpeg" alt="Company 360">
+        </div>
+    </div>
+
+    <!-- QR Attendance Lightboxes -->
+    <div id="lightbox-qr-1" class="lightbox">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">×</a>
+            <img src="../assets/images/projects/qr-scan.jpg" alt="QR Scan Interface">
+        </div>
+    </div>
+
+    <div id="lightbox-qr-2" class="lightbox">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">×</a>
+            <img src="../assets/images/projects/qr-dashboard.jpg" alt="Attendance Dashboard">
+        </div>
+    </div>
+
+    <!-- FemmeSight Lightboxes -->
+    <div id="lightbox-femme-1" class="lightbox">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">×</a>
+            <img src="../assets/images/projects/femme-wireframe.png" alt="Wireframes">
+        </div>
+    </div>
+
+    <div id="lightbox-femme-2" class="lightbox">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">×</a>
+            <img src="../assets/images/projects/femme-mockup.png" alt="Mockups">
+        </div>
+    </div>
+
+    <div id="lightbox-femme-3" class="lightbox">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">×</a>
+            <img src="../assets/images/projects/femme-prototype.jpg" alt="Prototype">
+        </div>
+    </div>
+
+    <!-- Inline CSS - Impact badge styling (demonstration of inline CSS requirement) -->
+    <div
+        style="display: none; background-color: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.3); color: #22c55e;">
+    </div>
+
+    <!-- Footer Section - Integrated in Page -->
+    <footer
+        style="background: linear-gradient(135deg, #1f2937 0%, #111827 100%); color: #e5e7eb; padding: 3rem 2rem 1.5rem; margin-top: 4rem;">
+
+        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem;">
+
+            <!-- Brand Section -->
+            <div>
+                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                    <span
+                        style="font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #ffffff;">Muhammad
+                        Ghiffari</span>
+                </div>
+                <p style="color: #9ca3af; font-size: 0.9375rem; line-height: 1.6; margin-bottom: 1rem;">
+                    Full-Stack Developer specializing in Laravel, React.js, and digital solutions.
+                </p>
+                <div
+                    style="display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.25rem; background-color: rgba(34, 197, 94, 0.1); border-radius: 0.75rem; border: 1px solid rgba(34, 197, 94, 0.3);">
+                    <span style="width: 10px; height: 10px; background-color: #22c55e; border-radius: 50%;"></span>
+                    <span style="color: #22c55e; font-size: 0.875rem; font-weight: 600;">Available for
+                        Opportunities</span>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4
+                    style="font-family: 'Poppins', sans-serif; font-size: 1.125rem; font-weight: 600; color: #ffffff; margin-bottom: 1rem;">
+                    Quick Links</h4>
+                <ul
+                    style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                    <li><a href="home.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9375rem;"
+                            target="_parent">Home</a></li>
+                    <li><a href="about.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9375rem;"
+                            target="_parent">About</a></li>
+                    <li><a href="projects.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9375rem;"
+                            target="_parent">Projects</a></li>
+                    <li><a href="experience.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9375rem;"
+                            target="_parent">Experience</a></li>
+                    <li><a href="contact.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9375rem;"
+                            target="_parent">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div>
+                <h4
+                    style="font-family: 'Poppins', sans-serif; font-size: 1.125rem; font-weight: 600; color: #ffffff; margin-bottom: 1rem;">
+                    Contact</h4>
+                <ul
+                    style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                    <li><a href="mailto:muhammad.ghiffari@student.president.ac.id"
+                            style="color: #9ca3af; text-decoration: none; font-size: 0.875rem;">muhammad.ghiffari@student.president.ac.id</a>
+                    </li>
+                    <li><a href="https://linkedin.com/in/muhammadghiffari457"
+                            style="color: #9ca3af; text-decoration: none; font-size: 0.875rem;"
+                            target="_blank">LinkedIn</a>
+                    </li>
+                    <li><a href="https://github.com/muhammadghiffari"
+                            style="color: #9ca3af; text-decoration: none; font-size: 0.875rem;"
+                            target="_blank">GitHub</a>
+                    </li>
+                    <li><span style="color: #9ca3af; font-size: 0.875rem;">North Cikarang, West Java</span></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Footer Bottom -->
+        <div
+            style="max-width: 1200px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center;">
+            <p style="color: #9ca3af; font-size: 0.875rem; margin: 0;">
+                © 2025 <strong style="color: #ffffff;">Muhammad Ghiffari</strong>. All rights reserved.
+            </p>
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

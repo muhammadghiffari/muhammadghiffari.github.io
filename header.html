@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Navigation</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+
+    <!-- Internal CSS - Navigation-specific styling -->
+    <style>
+        /* Header Container */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Main Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            background-color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: relative;
+            height: 80px;
+            width: 100%;
+        }
+
+        /* Logo Section */
+        .logo {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            line-height: 1;
+        }
+
+        .logo-title {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1;
+        }
+
+        /* Navigation Container */
+        .nav-container {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            color: #6b7280;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            text-decoration: none;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: #2563eb;
+        }
+
+        /* Active Link Indicator */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #2563eb;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* CTA Button */
+        .nav-cta {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            padding: 0.625rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+            background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+        }
+
+        /* Mobile Menu Toggle Button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.375rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            background: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            z-index: 1002;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: #1f2937;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        /* Hamburger Animation */
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+            background-color: #2563eb;
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+            background-color: #2563eb;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem 1.5rem;
+            }
+
+            .logo-name {
+                font-size: 1.25rem;
+            }
+
+            .logo-title {
+                font-size: 0.65rem;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            /* Hide desktop nav by default on mobile */
+            .nav-menu {
+                display: none;
+                /* CRITICAL: Default is hidden */
+                position: absolute;
+                top: 80px;
+                left: 0;
+                right: 0;
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+                padding: 1rem 0;
+                gap: 0;
+                background-color: #ffffff;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+                border-top: 2px solid #f3f4f6;
+                z-index: 1001;
+            }
+
+            /* CRITICAL FIX: Force display when active */
+            .nav-menu.active {
+                display: flex !important;
+                /* !important to override any conflicts */
+            }
+
+            .nav-menu li {
+                width: 100%;
+                border-bottom: 1px solid #f3f4f6;
+            }
+
+            .nav-menu li:last-child {
+                border-bottom: none;
+            }
+
+            .nav-link {
+                width: 100%;
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+                display: block;
+            }
+
+            .nav-link::after {
+                display: none;
+            }
+
+            .nav-link:hover {
+                background-color: #f9fafb;
+            }
+
+            .nav-cta {
+                width: calc(100% - 3rem);
+                margin: 1rem 1.5rem 0.5rem;
+                text-align: center;
+                display: block;
+            }
+        }
+
+        /* Tablet Styles */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .nav-menu {
+                gap: 1.5rem;
+            }
+
+            .nav-link {
+                font-size: 0.875rem;
+            }
+
+            .nav-cta {
+                padding: 0.5rem 1.25rem;
+                font-size: 0.875rem;
+            }
+
+            .logo-name {
+                font-size: 1.375rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+
+        <!-- Logo -->
+        <a href="../pages/home.html" class="logo" target="contentFrame">
+            <span class="logo-name">Muhammad Ghiffari</span>
+            <span class="logo-title">Full-Stack Developer</span>
+        </a>
+
+        <!-- Navigation Container -->
+        <div class="nav-container">
+            <!-- Mobile Menu Toggle Button -->
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li>
+                    <a href="../pages/home.html" class="nav-link" target="contentFrame">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="../pages/about.html" class="nav-link" target="contentFrame">
+                        About
+                    </a>
+                </li>
+                <li>
+                    <a href="../pages/projects.html" class="nav-link" target="contentFrame">
+                        Projects
+                    </a>
+                </li>
+                <li>
+                    <a href="../pages/experience.html" class="nav-link" target="contentFrame">
+                        Experience
+                    </a>
+                </li>
+                <li>
+                    <a href="../pages/contact.html" class="nav-cta" target="contentFrame">
+                        Contact Me
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </header>
+
+    <!-- JavaScript for Mobile Menu Toggle & Active State -->
+    <script>
+        // Mobile Menu Toggle Functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('.nav-link, .nav-cta');
+
+        // Toggle menu function
+        function toggleMenu() {
+            const isActive = navMenu.classList.contains('active');
+
+            if (isActive) {
+                // Close menu
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            } else {
+                // Open menu
+                navMenu.classList.add('active');
+                menuToggle.classList.add('active');
+                menuToggle.setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        // Toggle menu on button click
+        menuToggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        // Close menu when a link is clicked (mobile only)
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                if (window.innerWidth <= 768) {
+                    setTimeout(() => {
+                        if (navMenu.classList.contains('active')) {
+                            toggleMenu();
+                        }
+                    }, 200);
+                }
+
+                // Update active state
+                updateActiveNav();
+            });
+        });
+
+        // Close menu when clicking outside (mobile only)
+        document.addEventListener('click', function (e) {
+            if (window.innerWidth <= 768) {
+                const isClickInsideMenu = navMenu.contains(e.target);
+                const isClickOnToggle = menuToggle.contains(e.target);
+
+                if (!isClickInsideMenu && !isClickOnToggle && navMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            }
+        });
+
+        // Close menu when pressing Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+
+        // Update active navigation state
+        function updateActiveNav() {
+            try {
+                // Get current page from parent content frame
+                const contentFrame = parent.frames['contentFrame'];
+                if (contentFrame && contentFrame.location) {
+                    const currentPath = contentFrame.location.pathname;
+                    const currentPage = currentPath.split('/').pop().replace('.html', '');
+
+                    // Remove all active classes
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                    });
+
+                    // Add active class to matching link
+                    navLinks.forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href && href.includes(currentPage + '.html')) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            } catch (e) {
+                // Fallback: Set Home as active if can't detect
+                const homeLink = document.querySelector('a[href*="home.html"]');
+                if (homeLink) {
+                    homeLink.classList.add('active');
+                }
+            }
+        }
+
+        // Initialize active state on load
+        document.addEventListener('DOMContentLoaded', function () {
+            updateActiveNav();
+
+            // Check for URL changes periodically
+            if (parent.frames['contentFrame']) {
+                setInterval(updateActiveNav, 500);
+            }
+        });
+
+        // Handle window resize - close menu if resizing to desktop
+        let resizeTimer;
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+                if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            }, 250);
+        });
+    </script>
+
+    <!-- Inline CSS - Professional gradient accent -->
+    <div style="display: none; background: linear-gradient(135deg, #2563eb, #3b82f6); color: #1f2937;"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,902 @@
+/* ============================================
+   RESPONSIVE.CSS - Media Queries & Breakpoints
+   Muhammad Ghiffari Portfolio Website
+   Mobile-First Responsive Design
+   ============================================ */
+
+
+/* ============================================
+   BASE - MOBILE FIRST (320px - 767px)
+   Default styles are mobile-first
+   ============================================ */
+
+/* All base styles are already mobile-optimized in main.css and components.css */
+
+
+/* ============================================
+   TABLET - 768px and up
+   ============================================ */
+
+@media (min-width: 768px) {
+
+    /* Typography Adjustments */
+    h1 {
+        font-size: 3.5rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+    }
+
+    h3 {
+        font-size: 2rem;
+    }
+
+    /* Container Padding */
+    .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    /* Section Spacing */
+    .section {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    .section-lg {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
+
+
+    /* ==================== HOME PAGE ==================== */
+
+    /* Hero Section */
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+
+    .hero p {
+        font-size: 1.25rem;
+    }
+
+    .profile-image-container {
+        width: 240px;
+        height: 240px;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    /* ==================== ABOUT PAGE ==================== */
+
+    /* Skills Table */
+    .skills-table {
+        font-size: 1rem;
+    }
+
+    .skills-table th,
+    .skills-table td {
+        padding: 1.25rem 1.5rem;
+    }
+
+    /* Photo Gallery */
+    .photo-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    /* ==================== PROJECTS PAGE ==================== */
+
+    /* Project Gallery Grid */
+    .project-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .gallery-thumb {
+        aspect-ratio: 16/9;
+    }
+
+
+    /* ==================== EXPERIENCE PAGE ==================== */
+
+    /* Timeline - Stays Vertical on Tablet */
+    .timeline-vertical {
+        padding-left: 3rem;
+    }
+
+    .timeline-dot {
+        left: -3rem;
+        width: 24px;
+        height: 24px;
+    }
+
+    /* Photo Documentation Grid */
+    .photo-docs-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    /* Skills Gained Grid */
+    .skills-gained-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    /* ==================== CONTACT PAGE ==================== */
+
+    /* Contact Form Layout - Still Stacked on Tablet */
+    .contact-container {
+        flex-direction: column;
+    }
+
+    .contact-form-container {
+        padding: 2.5rem;
+    }
+
+    .contact-info-sidebar {
+        width: 100%;
+    }
+
+    /* Form Elements */
+    .radio-group,
+    .checkbox-group {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+
+    /* ==================== COMPONENTS ==================== */
+
+    /* Cards */
+    .card {
+        padding: 2rem;
+    }
+
+    /* Buttons */
+    .btn {
+        padding: 0.875rem 1.75rem;
+        font-size: 1rem;
+    }
+
+    .btn-lg {
+        padding: 1.125rem 2.25rem;
+        font-size: 1.125rem;
+    }
+
+    /* Stat Cards */
+    .stat-card {
+        padding: 2rem;
+    }
+
+    .stat-number {
+        font-size: 3.5rem;
+    }
+
+    /* Gallery Items */
+    .gallery {
+        gap: 2rem;
+    }
+
+    /* Timeline (General) */
+    .timeline {
+        padding-left: 3rem;
+    }
+
+    .timeline-content {
+        padding: 2rem;
+    }
+
+}
+
+
+/* ============================================
+   DESKTOP - 1024px and up
+   ============================================ */
+
+@media (min-width: 1024px) {
+
+    /* Typography */
+    h1 {
+        font-size: 4rem;
+    }
+
+    h2 {
+        font-size: 3rem;
+    }
+
+    .page-title {
+        font-size: 3.5rem;
+    }
+
+    /* Container */
+    .container {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+
+    /* Section Spacing */
+    .section {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+
+    .section-lg {
+        padding-top: 7rem;
+        padding-bottom: 7rem;
+    }
+
+
+    /* ==================== HOME PAGE ==================== */
+
+    /* Hero Section */
+    .hero h1 {
+        font-size: 4rem;
+    }
+
+    .hero p {
+        font-size: 1.375rem;
+    }
+
+    .profile-image-container {
+        width: 280px;
+        height: 280px;
+    }
+
+    /* Stats Grid - 3 Columns */
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+    }
+
+    /* Projects Grid - 3 Columns */
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+    }
+
+
+    /* ==================== ABOUT PAGE ==================== */
+
+    /* Photo Gallery - 3 Columns */
+    .photo-gallery {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    /* Skills Grid - Stays 2 Columns for Better Readability */
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
+    }
+
+
+    /* ==================== PROJECTS PAGE ==================== */
+
+    /* Project Gallery - 3 Columns */
+    .project-gallery {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    /* Lightbox Content */
+    .lightbox-content {
+        max-width: 85%;
+    }
+
+    .lightbox-content img {
+        max-height: 85vh;
+    }
+
+
+    /* ==================== EXPERIENCE PAGE ==================== */
+
+    /* Timeline - Horizontal Layout Option (Optional) */
+    .timeline-horizontal {
+        display: flex;
+        gap: 2rem;
+        padding: 0;
+    }
+
+    .timeline-horizontal::before {
+        display: none;
+    }
+
+    .timeline-horizontal .timeline-item {
+        flex: 1;
+        padding: 0;
+    }
+
+    .timeline-horizontal .timeline-dot {
+        position: relative;
+        left: 0;
+        margin: 0 auto 1rem;
+    }
+
+    /* Photo Documentation - 3 Columns */
+    .photo-docs-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    /* Skills Gained Grid - 3 Columns */
+    .skills-gained-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+    }
+
+    /* Certificates Slideshow */
+    .certificates-slideshow {
+        max-width: 900px;
+    }
+
+
+    /* ==================== CONTACT PAGE ==================== */
+
+    /* Contact Two-Column Layout */
+    .contact-container {
+        flex-direction: row;
+        gap: 3rem;
+    }
+
+    .contact-form-container {
+        flex: 1;
+        padding: 3rem;
+    }
+
+    .contact-info-sidebar {
+        flex: 0 0 380px;
+        padding: 2.5rem;
+    }
+
+    /* Form Radio/Checkbox Grid - Back to Column */
+    .radio-group,
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ==================== COMPONENTS ==================== */
+
+    /* Project Cards */
+    .project-card {
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .project-image-container {
+        height: 240px;
+    }
+
+    /* Stat Cards */
+    .stat-card {
+        padding: 2.5rem;
+    }
+
+    .stat-number {
+        font-size: 4rem;
+    }
+
+    /* Timeline Cards */
+    .timeline-card {
+        padding: 2.5rem;
+    }
+
+    /* Gallery */
+    .gallery {
+        gap: 2.5rem;
+    }
+
+}
+
+
+/* ============================================
+   LARGE DESKTOP - 1440px and up
+   ============================================ */
+
+@media (min-width: 1440px) {
+
+    /* Typography - Max Size */
+    h1 {
+        font-size: 4.5rem;
+    }
+
+    h2 {
+        font-size: 3.5rem;
+    }
+
+    .page-title {
+        font-size: 4rem;
+    }
+
+    /* Container Max Width */
+    .container {
+        max-width: 1400px;
+    }
+
+    /* Section Spacing */
+    .section {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
+
+    .section-lg {
+        padding-top: 8rem;
+        padding-bottom: 8rem;
+    }
+
+
+    /* ==================== HOME PAGE ==================== */
+
+    .hero h1 {
+        font-size: 4.5rem;
+    }
+
+    .hero p {
+        font-size: 1.5rem;
+        max-width: 800px;
+    }
+
+    .profile-image-container {
+        width: 320px;
+        height: 320px;
+    }
+
+    /* Stats Grid - Larger Gaps */
+    .stats-grid {
+        gap: 3rem;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+        gap: 3rem;
+    }
+
+
+    /* ==================== ABOUT PAGE ==================== */
+
+    /* Photo Gallery - 4 Columns on Ultra Wide */
+    .photo-gallery {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+
+    /* ==================== PROJECTS PAGE ==================== */
+
+    /* Project Gallery - 4 Columns */
+    .project-gallery {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+
+    /* ==================== EXPERIENCE PAGE ==================== */
+
+    /* Photo Documentation - 4 Columns */
+    .photo-docs-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Certificates Slideshow */
+    .certificates-slideshow {
+        max-width: 1000px;
+    }
+
+
+    /* ==================== CONTACT PAGE ==================== */
+
+    .contact-info-sidebar {
+        flex: 0 0 420px;
+    }
+
+}
+
+
+/* ============================================
+   EXTRA LARGE SCREENS - 1920px and up
+   ============================================ */
+
+@media (min-width: 1920px) {
+
+    /* Container Max Width for Ultra Wide */
+    .container {
+        max-width: 1600px;
+    }
+
+    /* Typography */
+    h1 {
+        font-size: 5rem;
+    }
+
+    h2 {
+        font-size: 4rem;
+    }
+
+    .page-title {
+        font-size: 4.5rem;
+    }
+
+    /* Hero */
+    .hero h1 {
+        font-size: 5rem;
+    }
+
+    .profile-image-container {
+        width: 360px;
+        height: 360px;
+    }
+
+}
+
+
+/* ============================================
+   SMALL MOBILE - 480px and below
+   ============================================ */
+
+@media (max-width: 480px) {
+
+    /* Typography - Smaller on Tiny Screens */
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+
+    /* Container Padding */
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Section Spacing */
+    .section {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+
+    /* ==================== HOME PAGE ==================== */
+
+    .hero h1 {
+        font-size: 2.25rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .profile-image-container {
+        width: 160px;
+        height: 160px;
+    }
+
+    /* Button Stacking */
+    .hero .flex {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .hero .btn {
+        width: 100%;
+    }
+
+    /* Stats Grid - Single Column */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    /* Projects Grid - Single Column */
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ==================== ABOUT PAGE ==================== */
+
+    /* Photo Gallery - Single Column */
+    .photo-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    /* Skills Grid - Single Column */
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ==================== PROJECTS PAGE ==================== */
+
+    /* Project Gallery - Single Column */
+    .project-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .project-detail-title {
+        font-size: 1.5rem;
+    }
+
+
+    /* ==================== EXPERIENCE PAGE ==================== */
+
+    .experience-title {
+        font-size: 1.5rem;
+    }
+
+    /* Timeline Spacing */
+    .timeline-vertical {
+        padding-left: 1.5rem;
+    }
+
+    .timeline-dot {
+        left: -2rem;
+        width: 16px;
+        height: 16px;
+    }
+
+    /* Photo Docs - Single Column */
+    .photo-docs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Skills Gained - Single Column */
+    .skills-gained-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ==================== CONTACT PAGE ==================== */
+
+    .contact-form-container {
+        padding: 1.5rem;
+    }
+
+    .contact-info-sidebar {
+        padding: 1.5rem;
+    }
+
+    .form-title {
+        font-size: 1.5rem;
+    }
+
+    /* Radio/Checkbox - Single Column on Tiny */
+    .radio-group,
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ==================== COMPONENTS ==================== */
+
+    /* Cards */
+    .card,
+    .project-card,
+    .stat-card {
+        padding: 1.5rem;
+    }
+
+    /* Buttons */
+    .btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.9375rem;
+    }
+
+    .btn-lg {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+
+}
+
+
+/* ============================================
+   LANDSCAPE ORIENTATION - Mobile Landscape
+   ============================================ */
+
+@media (max-height: 600px) and (orientation: landscape) {
+
+    /* Reduce vertical spacing in landscape */
+    .section {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .hero {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .profile-image-container {
+        width: 150px;
+        height: 150px;
+    }
+
+    /* Reduce header height */
+    .header-frame {
+        height: 60px;
+    }
+
+    .footer-frame {
+        height: 50px;
+    }
+
+}
+
+
+/* ============================================
+   HOVER STATES - Only on Devices with Hover
+   ============================================ */
+
+@media (hover: hover) and (pointer: fine) {
+
+    /* Enable hover effects only on devices that support hover */
+    .card:hover,
+    .project-card:hover,
+    .stat-card:hover {
+        transform: translateY(-8px);
+    }
+
+    .gallery-item:hover {
+        transform: translateY(-12px);
+    }
+
+    .photo-item:hover,
+    .photo-doc-item:hover {
+        transform: translateY(-16px) scale(1.03);
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .timeline-card:hover {
+        transform: translateX(12px);
+    }
+
+}
+
+
+/* ============================================
+   TOUCH DEVICES - Disable Hover Transforms
+   ============================================ */
+
+@media (hover: none) and (pointer: coarse) {
+
+    /* Disable transform hover effects on touch devices */
+    .card:hover,
+    .project-card:hover,
+    .stat-card:hover,
+    .gallery-item:hover,
+    .photo-item:hover,
+    .photo-doc-item:hover,
+    .btn:hover,
+    .timeline-card:hover {
+        transform: none;
+    }
+
+    /* Keep color/shadow changes but no position transforms */
+
+}
+
+
+/* ============================================
+   PRINT RESPONSIVE
+   ============================================ */
+
+@media print {
+
+    /* Single column layout for print */
+    .stats-grid,
+    .projects-grid,
+    .photo-gallery,
+    .skills-grid,
+    .photo-docs-grid,
+    .skills-gained-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Remove animations and transforms */
+    * {
+        animation: none !important;
+        transform: none !important;
+    }
+
+    /* Optimize spacing for print */
+    .section {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+}
+
+
+/* ============================================
+   CUSTOM BREAKPOINT UTILITIES
+   ============================================ */
+
+/* Hide on Mobile */
+.hide-mobile {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .hide-mobile {
+        display: block;
+    }
+}
+
+/* Hide on Desktop */
+.hide-desktop {
+    display: block;
+}
+
+@media (min-width: 1024px) {
+    .hide-desktop {
+        display: none;
+    }
+}
+
+/* Show only on Tablet */
+.show-tablet-only {
+    display: none;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .show-tablet-only {
+        display: block;
+    }
+}
+
+
+/* ============================================
+   RESPONSIVE IMAGES
+   ============================================ */
+
+/* Ensure images never overflow */
+img,
+video,
+iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Responsive iframe containers */
+.iframe-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

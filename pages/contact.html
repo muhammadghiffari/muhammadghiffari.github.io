@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Muhammad Ghiffari</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
+    
+    <!-- Font Awesome CDN untuk Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <!-- Internal CSS - Contact page specific styles with form validation -->
+    <style>
+        /* Contact Header */
+        .contact-header {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            padding: 4rem 0 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+        }
+
+        /* Contact Container Layout */
+        .contact-container {
+            display: flex;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: flex-start;
+        }
+
+        /* Contact Form Container */
+        .contact-form-container {
+            flex: 1;
+            background-color: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Contact Info Sidebar */
+        .contact-info-sidebar {
+            flex: 0 0 350px;
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form Validation Styles using :valid, :invalid, :focus */
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            background-color: #ffffff;
+        }
+
+        /* Valid State - Green Border */
+        .form-input:valid,
+        .form-textarea:valid,
+        .form-select:valid {
+            border-color: #22c55e;
+        }
+
+        .form-input:valid:focus,
+        .form-textarea:valid:focus,
+        .form-select:valid:focus {
+            border-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+        }
+
+        /* Invalid State - Red Border (only after user interaction) */
+        .form-input:invalid:not(:placeholder-shown),
+        .form-textarea:invalid:not(:placeholder-shown) {
+            border-color: #ef4444;
+        }
+
+        .form-input:invalid:not(:placeholder-shown):focus,
+        .form-textarea:invalid:not(:placeholder-shown):focus {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+
+        /* Required Field Asterisk */
+        .required-asterisk {
+            color: #ef4444;
+            margin-left: 0.25rem;
+            font-weight: 700;
+        }
+
+        /* Radio and Checkbox Custom Styling */
+        input[type="radio"],
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #2563eb;
+            transition: all 0.2s ease;
+        }
+
+        input[type="radio"]:hover,
+        input[type="checkbox"]:hover {
+            transform: scale(1.1);
+        }
+
+        input[type="radio"]:focus,
+        input[type="checkbox"]:focus {
+            outline: 2px solid #2563eb;
+            outline-offset: 2px;
+        }
+
+        /* Radio and Checkbox Labels */
+        .radio-label,
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .radio-label:hover,
+        .checkbox-label:hover {
+            background-color: #f9fafb;
+            border-color: #e5e7eb;
+        }
+
+        .radio-label:has(input:checked),
+        .checkbox-label:has(input:checked) {
+            background-color: rgba(37, 99, 235, 0.05);
+            border-color: #2563eb;
+        }
+
+        /* Submit Button Hover & Active States */
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            margin-top: 1.5rem;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+            background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Contact Info Items */
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.25rem;
+            background-color: #f9fafb;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .contact-info-item:hover {
+            background-color: #ffffff;
+            border-color: #2563eb;
+            transform: translateX(8px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Social Links */
+        .social-links-list {
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .social-link-item {
+            flex: 1;
+        }
+
+        .social-link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.875rem;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .social-link-btn:hover {
+            background-color: #2563eb;
+            border-color: #2563eb;
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 1024px) {
+            .contact-container {
+                flex-direction: column;
+            }
+
+            .contact-info-sidebar {
+                flex: 1;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-form-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .contact-info-sidebar {
+                padding: 2rem 1.5rem;
+            }
+
+            .social-links-list {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Contact Header -->
+    <section class="contact-header">
+        <div class="container" style="position: relative; z-index: 2;">
+            <h1
+                style="font-family: 'Poppins', sans-serif; font-size: 3rem; font-weight: 700; margin-bottom: 1rem; color: #ffffff;">
+                Get In Touch
+            </h1>
+            <p style="font-size: 1.25rem; opacity: 0.95; max-width: 700px; line-height: 1.75; color: #f3f4f6;">
+                Interested in collaboration? Let's discuss your project or opportunity!
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="section">
+        <div class="container">
+
+            <div class="contact-container">
+
+                <!-- CONTACT FORM - ALL 7 INPUT TYPES REQUIRED -->
+                <div class="contact-form-container">
+
+                    <h2
+                        style="font-family: 'Poppins', sans-serif; font-size: 2rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem;">
+                        Send Me a Message
+                    </h2>
+                    <p style="color: #6b7280; margin-bottom: 2rem; line-height: 1.75;">
+                        Fill out the form below and I'll get back to you as soon as possible.
+                    </p>
+
+                    <form class="contact-form" action="#" method="POST">
+
+                        <!-- 1. TEXT INPUT - Name -->
+                        <div class="form-group">
+                            <label for="name" class="form-label">
+                                Full Name
+                                <span class="required-asterisk">*</span>
+                            </label>
+                            <input type="text" id="name" name="name" class="form-input"
+                                placeholder="Enter your full name" required minlength="3">
+                        </div>
+
+                        <!-- 2. TEXT INPUT - Email -->
+                        <div class="form-group">
+                            <label for="email" class="form-label">
+                                Email Address
+                                <span class="required-asterisk">*</span>
+                            </label>
+                            <input type="email" id="email" name="email" class="form-input"
+                                placeholder="your.email@example.com" required>
+                            <small class="form-helper">We'll never share your email with anyone else.</small>
+                        </div>
+
+                        <!-- 3. PASSWORD INPUT - Access Code -->
+                        <div class="form-group">
+                            <label for="access" class="form-label">
+                                Access Code (Optional)
+                            </label>
+                            <input type="password" id="access" name="access" class="form-input"
+                                placeholder="Enter access code for premium portfolio access" minlength="6">
+                            <small class="form-helper">Leave blank for general inquiry. Premium access requires a
+                                code.</small>
+                        </div>
+
+                        <!-- 4. RADIO BUTTONS - Inquiry Type -->
+                        <div class="form-group">
+                            <label class="form-label">
+                                Type of Inquiry
+                                <span class="required-asterisk">*</span>
+                            </label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="inquiry" value="project" required>
+                                    <span>Project Collaboration</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="inquiry" value="job">
+                                    <span>Job Opportunity</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="inquiry" value="consultation">
+                                    <span>Technical Consultation</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="inquiry" value="other">
+                                    <span>General Inquiry</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- 5. CHECKBOXES - Topics of Interest -->
+                        <div class="form-group">
+                            <label class="form-label">
+                                Topics of Interest
+                            </label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="topics" value="fullstack">
+                                    <span>Full-Stack Development</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="topics" value="laravel">
+                                    <span>Laravel Development</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="topics" value="uiux">
+                                    <span>UI/UX Design</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="topics" value="wordpress">
+                                    <span>WordPress Development</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="topics" value="database">
+                                    <span>Database Design & Optimization</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- 6. SELECT DROPDOWN - Preferred Contact Method -->
+                        <div class="form-group">
+                            <label for="contact-method" class="form-label">
+                                Preferred Contact Method
+                                <span class="required-asterisk">*</span>
+                            </label>
+                            <select id="contact-method" name="method" class="form-select" required>
+                                <option value="">-- Select an option --</option>
+                                <option value="email">Email</option>
+                                <option value="linkedin">LinkedIn Message</option>
+                                <option value="phone">Phone Call</option>
+                                <option value="whatsapp">WhatsApp</option>
+                            </select>
+                        </div>
+
+                        <!-- 7. TEXTAREA - Message -->
+                        <div class="form-group">
+                            <label for="message" class="form-label">
+                                Your Message
+                                <span class="required-asterisk">*</span>
+                            </label>
+                            <textarea id="message" name="message" rows="6" class="form-textarea"
+                                placeholder="Tell me about your project or inquiry..." required
+                                minlength="20"></textarea>
+                            <small class="form-helper">Minimum 20 characters required.</small>
+                        </div>
+
+                        <!-- SUBMIT BUTTON -->
+                        <button type="submit" class="btn-submit">
+                            Send Message
+                        </button>
+
+                    </form>
+
+                </div>
+
+                <!-- Contact Info Sidebar -->
+                <div class="contact-info-sidebar">
+
+                    <h3
+                        style="font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #1f2937; margin-bottom: 1.5rem;">
+                        Contact Information
+                    </h3>
+
+                    <!-- Email -->
+                    <div class="contact-info-item">
+                        <div class="contact-icon"><i class="fab fa-instagram"></i></div>
+                        <div>
+                            <h4 style="font-weight: 600; color: #1f2937; margin-bottom: 0.25rem; font-size: 0.875rem;">
+                                Email</h4>
+                            <a href="mailto:muhammad.ghiffari@student.president.ac.id"
+                                style="color: #2563eb; font-size: 0.875rem; word-break: break-all;">
+                                muhammad.ghiffari@student.president.ac.id
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- LinkedIn -->
+                    <div class="contact-info-item">
+                        <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
+                        <div>
+                            <h4 style="font-weight: 600; color: #1f2937; margin-bottom: 0.25rem; font-size: 0.875rem;">
+                                LinkedIn</h4>
+                            <a href="https://linkedin.com/in/muhammadghiffari457" target="_blank"
+                                rel="noopener noreferrer" style="color: #2563eb; font-size: 0.875rem;">
+                                linkedin.com/in/muhammadghiffari457
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- GitHub -->
+                    <div class="contact-info-item">
+                        <div class="contact-icon"><i class="fab fa-github"></i></div>
+                        <div>
+                            <h4 style="font-weight: 600; color: #1f2937; margin-bottom: 0.25rem; font-size: 0.875rem;">
+                                GitHub</h4>
+                            <a href="https://github.com/muhammadghiffari" target="_blank"
+                                rel="noopener noreferrer" style="color: #2563eb; font-size: 0.875rem;">
+                                https://github.com/muhammadghiffari
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="contact-info-item">
+                        <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div>
+                            <h4 style="font-weight: 600; color: #1f2937; margin-bottom: 0.25rem; font-size: 0.875rem;">
+                                Location</h4>
+                            <p style="color: #6b7280; font-size: 0.875rem; margin: 0;">
+                                North Cikarang, West Java<br>Indonesia
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Divider -->
+                    <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 2rem 0;">
+
+                    <!-- Social Media Links -->
+                    <h4
+                        style="font-family: 'Poppins', sans-serif; font-size: 1.125rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">
+                        Connect With Me
+                    </h4>
+
+                    <ul class="social-links-list">
+                        <li class="social-link-item">
+                            <a href="https://linkedin.com/in/muhammadghiffari457" class="social-link-btn"
+                                target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                                <span style="font-size: 1.25rem;"><i class="fab fa-linkedin"></i></span>
+                            </a>
+                        </li>
+                        <li class="social-link-item">
+                            <a href="https://github.com/muhammadghiffari" class="social-link-btn" target="_blank"
+                                rel="noopener noreferrer" title="GitHub">
+                                <span style="font-size: 1.25rem;"><i class="fab fa-github"></i></span>
+                            </a>
+                        </li>
+                        <li class="social-link-item">
+                            <a href="https://instagram.com/mghiffaa" class="social-link-btn" target="_blank"
+                                rel="noopener noreferrer" title="Instagram">
+                                <span style="font-size: 1.25rem;"><i class="fab fa-instagram"></i></span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- Download CV Button -->
+                    <a href="../assets/documents/cv.pdf" class="btn btn-primary" download="Muhammad_Ghiffari_CV.pdf"
+                        style="width: 100%; margin-top: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                        <span style="font-size: 1.25rem;">↓</span>
+                        Download CV
+                    </a>
+
+                    <!-- Availability Badge -->
+                    <div
+                        style="margin-top: 2rem; padding: 1.25rem; background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%); border: 2px solid rgba(34, 197, 94, 0.3); border-radius: 0.75rem; text-align: center;">
+                        <div
+                            style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                            <span
+                                style="width: 10px; height: 10px; background-color: #22c55e; border-radius: 50%; animation: pulse 2s infinite;"></span>
+                            <span style="color: #22c55e; font-weight: 700; font-size: 0.875rem;">AVAILABLE FOR
+                                WORK</span>
+                        </div>
+                        <p style="color: #6b7280; font-size: 0.8125rem; margin: 0;">
+                            Open for full-time positions and freelance projects
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Inline CSS - Form validation color accents (demonstration of inline CSS requirement) -->
+    <div
+        style="display: none; border-color: #22c55e; box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1); background-color: rgba(37, 99, 235, 0.05);">
+    </div>
+
+<!-- Footer Section - Integrated in Page -->
+<footer
+    style="background: linear-gradient(135deg, #1f2937 0%, #111827 100%); color: #e5e7eb; padding: 3rem 2rem 1.5rem; margin-top: 4rem;">
+
+    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem;">
+
+        <!-- Brand Section -->
+        <div>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <span
+                    style="font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #ffffff;">Muhammad
+                    Ghiffari</span>
+            </div>
+            <p style="color: #9ca3af; font-size: 0.9375rem; line-height: 1.6; margin-bottom: 1rem;">
+                Full-Stack Developer specializing in Laravel, React.js, and digital solutions.
+            </p>
+            <div
+                style="display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.25rem; background-color: rgba(34, 197, 94, 0.1); border-radius: 0.75rem; border: 1px solid rgba(34, 197, 94, 0.3);">
+                <span style="width: 10px; height: 10px; background-color: #22c55e; border-radius: 50%;"></span>
+                <span style="color: #22c55e; font-size: 0.875rem; font-weight: 600;">Available for Opportunities</span>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+            <h4
+                style="font-family: 'Poppins', sans-serif; font-size: 1.125rem; font-weight: 600; color: #ffffff; margin-bottom: 1rem;">
+                Quick Links</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                <li><a href="home.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9375rem;"
+                        target="_parent">Home</a></li>
+                <li><a href="about.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9375rem;"
+                        target="_parent">About</a></li>
+                <li><a href="projects.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9375rem;"
+                        target="_parent">Projects</a></li>
+                <li><a href="experience.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9375rem;"
+                        target="_parent">Experience</a></li>
+                <li><a href="contact.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9375rem;"
+                        target="_parent">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div>
+            <h4
+                style="font-family: 'Poppins', sans-serif; font-size: 1.125rem; font-weight: 600; color: #ffffff; margin-bottom: 1rem;">
+                Contact</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                <li><a href="mailto:muhammad.ghiffari@student.president.ac.id"
+                        style="color: #9ca3af; text-decoration: none; font-size: 0.875rem;">muhammad.ghiffari@student.president.ac.id</a>
+                </li>
+                <li><a href="https://linkedin.com/in/muhammadghiffari457"
+                        style="color: #9ca3af; text-decoration: none; font-size: 0.875rem;" target="_blank">LinkedIn</a>
+                </li>
+                <li><a href="https://github.com/muhammadghiffari"
+                        style="color: #9ca3af; text-decoration: none; font-size: 0.875rem;" target="_blank">GitHub</a>
+                </li>
+                <li><span style="color: #9ca3af; font-size: 0.875rem;">North Cikarang, West Java</span></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Footer Bottom -->
+    <div
+        style="max-width: 1200px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center;">
+        <p style="color: #9ca3af; font-size: 0.875rem; margin: 0;">
+            © 2025 <strong style="color: #ffffff;">Muhammad Ghiffari</strong>. All rights reserved.
+        </p>
+    </div>
+
+</footer>
+
+</body>
+
+</html>

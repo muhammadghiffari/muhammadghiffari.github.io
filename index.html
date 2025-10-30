@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Muhammad Ghiffari - Full-Stack Developer | Information Technology Student at President University | Laravel, React.js, Web Development Portfolio">
+    <meta name="keywords"
+        content="Muhammad Ghiffari, Full-Stack Developer, Web Developer, Laravel, React, Portfolio, President University">
+    <meta name="author" content="Muhammad Ghiffari">
+
+    <!-- Title -->
+    <title>Muhammad Ghiffari | Full-Stack Developer Portfolio</title>
+
+    <!-- Favicon - Add These Lines -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/android-chrome-192x192.png">
+
+    <!-- Font Awesome CDN untuk Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts CDN - Required for Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- External CSS - Main Stylesheet -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- Internal CSS - Frame-specific styling -->
+    <style>
+        /* Frame Container Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #ffffff;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Frame Layout Structure */
+        .frame-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* Header Frame */
+        .header-frame {
+            width: 100%;
+            height: 80px;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 100;
+            background-color: #ffffff;
+        }
+
+        /* Content Frame */
+        .content-frame {
+            flex: 1;
+            width: 100%;
+            border: none;
+            overflow-y: auto;
+            background-color: #f9fafb;
+        }
+
+        /* Loading State */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Master Frame Container -->
+    <div class="frame-container">
+
+        <!-- Header Frame - Navigation Component -->
+        <iframe src="header.html" class="header-frame" name="headerFrame" title="Navigation Header" scrolling="no">
+            <!-- Fallback for browsers that don't support iframes -->
+            <p>Your browser does not support iframes. Please <a href="pages/home.html">click here</a> to view the
+                website.</p>
+        </iframe>
+
+        <!-- Content Frame - Main Content Area -->
+        <iframe src="pages/home.html" class="content-frame" name="contentFrame" id="mainContent" title="Main Content">
+            <!-- Fallback Content -->
+            <div class="loading">
+                <p>Loading content...</p>
+            </div>
+        </iframe>
+
+    </div>
+
+    <!-- Inline CSS - Custom accent for frame borders (demonstration of inline CSS requirement) -->
+    <div style="display: none; border-color: #2563eb; background-color: #f9fafb;"></div>
+
+</body>
+
+</html>

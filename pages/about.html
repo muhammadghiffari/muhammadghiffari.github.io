@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Muhammad Ghiffari</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
+    
+    <!-- Font Awesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <!-- Internal CSS - About page specific styles -->
+    <style>
+        /* About Header Section */
+        .about-header {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            padding: 3rem 0 2rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        /* Skills Table Styling */
+        .skills-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            margin: 2rem 0;
+        }
+
+        .skills-table thead {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+        }
+
+        .skills-table th {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            letter-spacing: 0.025em;
+        }
+
+        .skills-table tbody tr {
+            border-bottom: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .skills-table tbody tr:hover {
+            background-color: #f9fafb;
+            transform: scale(1.01);
+        }
+
+        .skills-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .skills-table td {
+            padding: 1rem 1.5rem;
+            font-size: 0.9375rem;
+            color: #6b7280;
+        }
+
+        .skills-table td:first-child {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        /* Proficiency Badge */
+        .proficiency-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.8125rem;
+            font-weight: 600;
+        }
+
+        .proficiency-advanced {
+            background-color: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .proficiency-intermediate {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        /* Ordered List Styling */
+        .education-list {
+            list-style: none;
+            counter-reset: education-counter;
+            padding: 0;
+            margin: 2rem 0;
+        }
+
+        .education-list li {
+            counter-increment: education-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 2rem;
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1.5rem 1.5rem 1.5rem 3.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .education-list li:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transform: translateX(8px);
+        }
+
+        .education-list li::before {
+            content: counter(education-counter);
+            position: absolute;
+            left: 1rem;
+            top: 1.5rem;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* Unordered List Styling */
+        .skills-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .skills-list li {
+            position: relative;
+            padding-left: 2rem;
+            color: #6b7280;
+            line-height: 1.75;
+            font-size: 0.9375rem;
+        }
+
+        .skills-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0.5rem;
+            color: #2563eb;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        /* Photo Gallery Grid */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .photo-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .photo-item:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+            color: white;
+            padding: 2rem 1.5rem 1rem;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .photo-item:hover .photo-caption {
+            transform: translateY(0);
+        }
+
+        .photo-caption h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: white;
+        }
+
+        .photo-caption p {
+            color: white;
+            font-size: 0.8125rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- About Header Section -->
+    <section class="about-header">
+        <div class="container">
+            <h1
+                style="font-family: 'Poppins', sans-serif; font-size: 3rem; font-weight: 700; color: #1f2937; margin-bottom: 1rem;">
+                About Me
+            </h1>
+            <p style="font-size: 1.25rem; color: #6b7280; max-width: 800px; line-height: 1.75;">
+                Passionate IT student bridging technology and communication through innovative digital solutions
+            </p>
+        </div>
+    </section>
+
+    <!-- About Me Story Section -->
+    <section class="section">
+        <div class="container">
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <h2
+                    style="font-family: 'Poppins', sans-serif; font-size: 2rem; font-weight: 700; color: #1f2937; margin-bottom: 1.5rem;">
+                    My Journey
+                </h2>
+
+                <div
+                    style="background-color: white; padding: 2rem; border-radius: 0.75rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07); border-left: 4px solid #2563eb;">
+                    <p style="color: #6b7280; line-height: 1.75; font-size: 1rem; margin-bottom: 1rem;">
+                        I am a passionate and forward-thinking <strong style="color: #1f2937;">Information Technology
+                            student at President University</strong>, majoring in Informatics. With a strong foundation
+                        in full-stack web development, I have successfully delivered impactful projects such as a
+                        <strong style="color: #2563eb;">Thesis Title Selection System with Real-Time Timer</strong>, a
+                        <strong style="color: #2563eb;">Point of Sale application</strong> for small businesses, and a
+                        <strong style="color: #2563eb;">professional landing page</strong> for the Center of e-Learning
+                        IMERI FKUI.
+                    </p>
+
+                    <p style="color: #6b7280; line-height: 1.75; font-size: 1rem; margin-bottom: 1rem;">
+                        During my <strong style="color: #1f2937;">6-month internship at IMERI FKUI</strong>, I merged
+                        technical development with public relations strategy by designing event landing pages, handling
+                        stakeholder communications, and producing documentation for institutional workshops. I received
+                        the <strong style="color: #22c55e;">Best Internship Performance Award</strong> (Predikat Sangat
+                        Baik) for my contributions.
+                    </p>
+
+                    <p style="color: #6b7280; line-height: 1.75; font-size: 1rem; margin: 0;">
+                        My aspiration is to build <strong style="color: #1f2937;">scalable, innovative digital
+                            solutions</strong> that bridge the gap between technology and communication, creating
+                        meaningful impact in education and beyond.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Education Section - ORDERED LIST #1 (Required) -->
+    <section class="section bg-light">
+        <div class="container">
+
+            <div class="section-header">
+                <h2 class="section-title">Education</h2>
+                <p class="section-subtitle">Academic background and achievements</p>
+            </div>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <ol class="education-list">
+                    <li>
+                        <h3
+                            style="font-family: 'Poppins', sans-serif; font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem;">
+                            President University
+                        </h3>
+                        <p style="color: #2563eb; font-weight: 600; margin-bottom: 0.5rem;">
+                            Bachelor of Science in Information Technology (2025-2028)
+                        </p>
+                        <p style="color: #6b7280; line-height: 1.75; margin-bottom: 0.5rem;">
+                            Currently pursuing a degree in Informatics with focus on full-stack development and digital
+                            innovation.
+                        </p>
+                        <p style="color: #6b7280; font-size: 0.875rem; margin: 0;">
+                            <strong>Expected Graduation:</strong> 2028 | <strong>Relevant Coursework:</strong> Web
+                            Programming, Database Systems, UI/UX Design
+                        </p>
+                    </li>
+
+                    <li>
+                        <h3
+                            style="font-family: 'Poppins', sans-serif; font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem;">
+                            SMKN 40 Jakarta
+                        </h3>
+                        <p style="color: #2563eb; font-weight: 600; margin-bottom: 0.5rem;">
+                            Vocational High School Diploma in Software Engineering (2022-2025)
+                        </p>
+                        <p style="color: #6b7280; line-height: 1.75; margin-bottom: 0.5rem;">
+                            Specialized in full-stack development and database management with hands-on industry
+                            experience.
+                        </p>
+                        <p style="color: #6b7280; font-size: 0.875rem; margin: 0;">
+                            <strong>Achievement:</strong> AWS C4 Cloud Computing Club Competition – Grand Finalist
+                            (Regional DKI Jakarta)
+                        </p>
+                    </li>
+                </ol>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Skills Table Section - TABLE REQUIREMENT -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-header">
+                <h2 class="section-title">Technical Skills</h2>
+                <p class="section-subtitle">Comprehensive overview of my technology stack and proficiency levels</p>
+            </div>
+
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <table class="skills-table">
+                    <thead>
+                        <tr>
+                            <th>Technology</th>
+                            <th>Category</th>
+                            <th>Proficiency Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Laravel 11/12</td>
+                            <td>Backend</td>
+                            <td><span class="proficiency-badge proficiency-advanced">Advanced</span></td>
+                        </tr>
+                        <tr>
+                            <td>Golang</td>
+                            <td>Backend</td>
+                            <td><span class="proficiency-badge proficiency-intermediate">Intermediate</span></td>
+                        </tr>
+                        <tr>
+                            <td>React.js</td>
+                            <td>Frontend</td>
+                            <td><span class="proficiency-badge proficiency-advanced">Advanced</span></td>
+                        </tr>
+                        <tr>
+                            <td>Next.js</td>
+                            <td>Frontend</td>
+                            <td><span class="proficiency-badge proficiency-intermediate">Intermediate</span></td>
+                        </tr>
+                        <tr>
+                            <td>MySQL</td>
+                            <td>Database</td>
+                            <td><span class="proficiency-badge proficiency-advanced">Advanced</span></td>
+                        </tr>
+                        <tr>
+                            <td>PostgreSQL</td>
+                            <td>Database</td>
+                            <td><span class="proficiency-badge proficiency-intermediate">Intermediate</span></td>
+                        </tr>
+                        <tr>
+                            <td>Tailwind CSS</td>
+                            <td>Frontend</td>
+                            <td><span class="proficiency-badge proficiency-advanced">Advanced</span></td>
+                        </tr>
+                        <tr>
+                            <td>Figma</td>
+                            <td>UI/UX Design</td>
+                            <td><span class="proficiency-badge proficiency-advanced">Advanced</span></td>
+                        </tr>
+                        <tr>
+                            <td>WordPress</td>
+                            <td>CMS</td>
+                            <td><span class="proficiency-badge proficiency-advanced">Advanced</span></td>
+                        </tr>
+                        <tr>
+                            <td>Git & GitHub</td>
+                            <td>Version Control</td>
+                            <td><span class="proficiency-badge proficiency-advanced">Advanced</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Skills by Category - UNORDERED LIST #1 (Required) -->
+    <section class="section bg-light">
+        <div class="container">
+
+            <div class="section-header">
+                <h2 class="section-title">Skills by Category</h2>
+            </div>
+
+            <div
+                style="max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+
+                <!-- Frontend Development -->
+                <div
+                    style="background-color: white; padding: 2rem; border-radius: 0.75rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);">
+                    <h3
+                        style="font-family: 'Poppins', sans-serif; font-size: 1.25rem; font-weight: 700; color: #2563eb; margin-bottom: 1rem;">
+                        Frontend Development
+                    </h3>
+                    <ul class="skills-list">
+                        <li>HTML5, CSS3</li>
+                        <li>JavaScript (ES6+)</li>
+                        <li>React.js</li>
+                        <li>Tailwind CSS</li>
+                        <li>Vite</li>
+                    </ul>
+                </div>
+
+                <!-- Backend Development -->
+                <div
+                    style="background-color: white; padding: 2rem; border-radius: 0.75rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);">
+                    <h3
+                        style="font-family: 'Poppins', sans-serif; font-size: 1.25rem; font-weight: 700; color: #2563eb; margin-bottom: 1rem;">
+                        Backend Development
+                    </h3>
+                    <ul class="skills-list">
+                        <li>Laravel 11/12</li>
+                        <li>PHP</li>
+                        <li>Python</li>
+                        <li>Livewire 3</li>
+                        <li>WebSockets</li>
+                    </ul>
+                </div>
+
+                <!-- Database & Tools -->
+                <div
+                    style="background-color: white; padding: 2rem; border-radius: 0.75rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);">
+                    <h3
+                        style="font-family: 'Poppins', sans-serif; font-size: 1.25rem; font-weight: 700; color: #2563eb; margin-bottom: 1rem;">
+                        Database & Tools
+                    </h3>
+                    <ul class="skills-list">
+                        <li>MySQL (Schema Design)</li>
+                        <li>Query Optimization</li>
+                        <li>Database Security</li>
+                        <li>Git & GitHub</li>
+                        <li>WordPress, Moodle, H5P</li>
+                    </ul>
+                </div>
+
+                <!-- Design & Creative -->
+                <div
+                    style="background-color: white; padding: 2rem; border-radius: 0.75rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);">
+                    <h3
+                        style="font-family: 'Poppins', sans-serif; font-size: 1.25rem; font-weight: 700; color: #2563eb; margin-bottom: 1rem;">
+                        Design & Creative
+                    </h3>
+                    <ul class="skills-list">
+                        <li>Figma (UI/UX)</li>
+                        <li>Canva</li>
+                        <li>Adobe Illustrator</li>
+                        <li>Responsive Design</li>
+                        <li>Prototyping</li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Personal Skills - UNORDERED LIST #2 (Required) -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-header">
+                <h2 class="section-title">Personal Skills</h2>
+                <p class="section-subtitle">Soft skills that complement my technical expertise</p>
+            </div>
+
+            <div
+                style="max-width: 800px; margin: 0 auto; background-color: white; padding: 2.5rem; border-radius: 0.75rem; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);">
+                <ul class="skills-list" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                    <li>Strong teamwork and collaboration</li>
+                    <li>Effective communication (written & verbal)</li>
+                    <li>Time management and prioritization</li>
+                    <li>Adaptability and flexibility</li>
+                    <li>Logical problem-solving</li>
+                    <li>Proactive with high initiative</li>
+                    <li>Leadership and mentoring abilities</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section class="section bg-light">
+        <div class="container">
+
+            <div class="section-header">
+                <h2 class="section-title">Gallery</h2>
+                <p class="section-subtitle">Moments from my academic and professional journey</p>
+            </div>
+
+            <div class="photo-gallery">
+                <!-- Photo 1 -->
+                <div class="photo-item">
+                    <img src="../assets/images/profile/president-university.jpg" alt="President University Campus"
+                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'300\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'16\' font-family=\'Inter, sans-serif\'%3EPresident University%3C/text%3E%3C/svg%3E'">
+                    <div class="photo-caption">
+                        <h4>President University</h4>
+                        <p>My current campus where I'm pursuing IT degree</p>
+                    </div>
+                </div>
+
+                <!-- Photo 2 -->
+                <div class="photo-item">
+                    <img src="../assets/images/profile/workspace.jpg" alt="Development Workspace"
+                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'300\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'16\' font-family=\'Inter, sans-serif\'%3EWorkspace%3C/text%3E%3C/svg%3E'">
+                    <div class="photo-caption">
+                        <h4>Development Workspace</h4>
+                        <p>Where the magic happens - with my friend</p>
+                    </div>
+                </div>
+
+                <!-- Photo 3 -->
+                <div class="photo-item">
+                    <img src="../assets/images/profile/study-session.jpg" alt="Study Session"
+                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'300\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'16\' font-family=\'Inter, sans-serif\'%3EStudy Session%3C/text%3E%3C/svg%3E'">
+                    <div class="photo-caption">
+                        <h4>Study Session</h4>
+                        <p>Continuous learning and skill development</p>
+                    </div>
+                </div>
+
+                <!-- Photo 4 -->
+                <div class="photo-item">
+                    <img src="../assets/images/experience/imeri-office.jpg" alt="IMERI FKUI Office"
+                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'300\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'16\' font-family=\'Inter, sans-serif\'%3EIMERI Office%3C/text%3E%3C/svg%3E'">
+                    <div class="photo-caption">
+                        <h4>IMERI FKUI Office</h4>
+                        <p>My internship workplace at IMERI Faculty of Medicine UI - Center of e-Learning</p>
+                    </div>
+                </div>
+
+                <!-- Photo 5 -->
+                <div class="photo-item">
+                    <img src="../assets/images/experience/team-collaboration.jpg" alt="Team Collaboration"
+                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'300\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'16\' font-family=\'Inter, sans-serif\'%3ETeam Work%3C/text%3E%3C/svg%3E'">
+                    <div class="photo-caption">
+                        <h4>Team Collaboration</h4>
+                        <p>Working together with doctors, researchers, and amazing colleagues </p>
+                    </div>
+                </div>
+
+                <!-- Photo 6 -->
+                <div class="photo-item">
+                    <img src="../assets/images/experience/project-presentation.jpg" alt="Project Presentation"
+                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'300\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'16\' font-family=\'Inter, sans-serif\'%3EPresentation%3C/text%3E%3C/svg%3E'">
+                    <div class="photo-caption">
+                        <h4>Project Presentation</h4>
+                        <p>Showcasing development work to stakeholders</p>
+                    </div>
+                </div>
+
+                <!-- Photo 7 -->
+                <div class="photo-item">
+                    <img src="../assets/images/experience/aws-c4.jpg" alt="Cloud Innovation Day 2024"
+                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'300\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'16\' font-family=\'Inter, sans-serif\'%3EPresentation%3C/text%3E%3C/svg%3E'">
+                    <div class="photo-caption">
+                        <h4>AWS C4 2024 - Cloud Computing Club Competition</h4>
+                        <p>Cloud Innovation Day 2024 at Dinas Pendidikan</p>
+                    </div>
+                </div>
+
+                <!-- Photo 7 -->
+                <div class="photo-item">
+                    <img src="../assets/images/experience/aws-grandfinalis.jpg" alt="Project Presentation"
+                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23e5e7eb\' width=\'400\' height=\'300\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236b7280\' font-size=\'16\' font-family=\'Inter, sans-serif\'%3EPresentation%3C/text%3E%3C/svg%3E'">
+                    <div class="photo-caption">
+                        <h4>Grand Finalis AWS C4 (Cloud Computing Club Competition) - Regional DKI JAKARTA</h4>
+                        <p>26 Februari 2024</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Inline CSS - Custom badge colors (demonstration of inline CSS requirement) -->
+    <div
+        style="display: none; background-color: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.3); color: #22c55e;">
+    </div>
+
+    <!-- Footer Section - Integrated in Page -->
+    <footer
+        style="background: linear-gradient(135deg, #1f2937 0%, #111827 100%); color: #e5e7eb; padding: 3rem 2rem 1.5rem; margin-top: 4rem;">
+
+        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem;">
+
+            <!-- Brand Section -->
+            <div>
+                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                    <span
+                        style="font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #ffffff;">Muhammad
+                        Ghiffari</span>
+                </div>
+                <p style="color: #9ca3af; font-size: 0.9375rem; line-height: 1.6; margin-bottom: 1rem;">
+                    Full-Stack Developer specializing in Laravel, React.js, and digital solutions.
+                </p>
+                <div
+                    style="display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.25rem; background-color: rgba(34, 197, 94, 0.1); border-radius: 0.75rem; border: 1px solid rgba(34, 197, 94, 0.3);">
+                    <span style="width: 10px; height: 10px; background-color: #22c55e; border-radius: 50%;"></span>
+                    <span style="color: #22c55e; font-size: 0.875rem; font-weight: 600;">Available for
+                        Opportunities</span>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4
+                    style="font-family: 'Poppins', sans-serif; font-size: 1.125rem; font-weight: 600; color: #ffffff; margin-bottom: 1rem;">
+                    Quick Links</h4>
+                <ul
+                    style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                    <li><a href="home.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9375rem;"
+                            target="_parent">Home</a></li>
+                    <li><a href="about.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9375rem;"
+                            target="_parent">About</a></li>
+                    <li><a href="projects.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9375rem;"
+                            target="_parent">Projects</a></li>
+                    <li><a href="experience.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9375rem;"
+                            target="_parent">Experience</a></li>
+                    <li><a href="contact.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9375rem;"
+                            target="_parent">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div>
+                <h4
+                    style="font-family: 'Poppins', sans-serif; font-size: 1.125rem; font-weight: 600; color: #ffffff; margin-bottom: 1rem;">
+                    Contact</h4>
+                <ul
+                    style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                    <li><a href="mailto:muhammad.ghiffari@student.president.ac.id"
+                            style="color: #9ca3af; text-decoration: none; font-size: 0.875rem;">muhammad.ghiffari@student.president.ac.id</a>
+                    </li>
+                    <li><a href="https://linkedin.com/in/muhammadghiffari457"
+                            style="color: #9ca3af; text-decoration: none; font-size: 0.875rem;"
+                            target="_blank">LinkedIn</a>
+                    </li>
+                    <li><a href="https://github.com/muhammadghiffari"
+                            style="color: #9ca3af; text-decoration: none; font-size: 0.875rem;"
+                            target="_blank">GitHub</a>
+                    </li>
+                    <li><span style="color: #9ca3af; font-size: 0.875rem;">North Cikarang, West Java</span></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Footer Bottom -->
+        <div
+            style="max-width: 1200px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center;">
+            <p style="color: #9ca3af; font-size: 0.875rem; margin: 0;">
+                © 2025 <strong style="color: #ffffff;">Muhammad Ghiffari</strong>. All rights reserved.
+            </p>
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
